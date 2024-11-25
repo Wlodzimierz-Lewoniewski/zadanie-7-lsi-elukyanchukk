@@ -1,9 +1,29 @@
-#Przykład otrzymania wartości wprowadzonej przy użyciu funkcji input().
-wyraz=input()
+import string
 
-#W celu poprawnego działania kodu w ramach GitHub Classroom warto dodatkowo użyć funkcję strip()
-#To pozwoli na usunięcie spacji oraz innych "spacjopodobnych" znaków (tabulacja \t', przejście do nowej linii '\n' lub '\r' etc.) z "głowy" i "ogona" (lewej i prawej części wyrazu).
-wyraz=wyraz.strip()
+n_docs = int(input("Liczba dokumentów do przetworzenia: "))
 
-#Wydruk na ekranie (w konsoli)
-print ('Ten wyraz został wprowadzony:', wyraz)
+docs_tokens = []
+
+for n in range(n_docs): 
+    doc = input(f"Dokument {n+1}: ").strip().lower()
+    doc = doc.translate(str.maketrans('', '', string.punctuation))
+    doc_tokens = doc.split()
+    docs_tokens.append(doc_tokens)
+
+zapytanie = input("Zapytanie: ").strip().lower()
+zap_tokens = zapytanie.split()
+
+k = int(input("Liczba wymiarów po zredukowaniu: "))
+
+vocabulary = sorted(set(word for doc_tokens in docs_tokens for word in doc_tokens))
+
+print(vocabulary)
+
+for doc in docs_tokens:
+    doc_voc = []
+    for word in doc: 
+        if word in vocabulary:
+            doc_voc.append(1)
+        else:
+            doc_voc.append(0)
+    print(doc_voc)
