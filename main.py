@@ -18,12 +18,3 @@ k = int(input("Liczba wymiarów po zredukowaniu: "))
 vocabulary = sorted(set(word for doc_tokens in docs_tokens for word in doc_tokens))
 
 print(vocabulary)
-
-for doc in docs_tokens:
-    doc_voc = []
-    for word in doc: 
-        if word in vocabulary:
-            doc_voc.append(1)
-        else:
-            doc_voc.append(0)
-    print(doc_voc)
